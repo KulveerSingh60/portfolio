@@ -3,7 +3,6 @@
 A personal portfolio website with an IDE / terminal-inspired theme, built to showcase my
 work, skills, and experience as a full-stack & web developer.
 
-🔗 **Live site:** _add your GitHub Pages / hosting URL here_
 
 ## ✨ Features
 
