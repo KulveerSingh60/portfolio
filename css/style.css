@@ -42,7 +42,12 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  overflow-x: hidden;
+  overflow-x: clip; /* modern browsers: clips without breaking position:sticky */
+}
 
 body {
   margin: 0;
@@ -50,6 +55,8 @@ body {
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
   line-height: 1.65;
   font-size: 15px;
   letter-spacing: 0.1px;
@@ -1048,6 +1055,26 @@ img, svg, .code-window, .project-card, .cert-card { max-width: 100%; }
   .tilt-wrap { margin-top: 34px; max-width: 520px; margin-inline: auto; }
 
   .section { padding: 72px 0; }
+
+  /* AOS slides elements 100px sideways before animating in, which pushes
+     content past the right edge and creates a horizontal scrollbar on
+     phones/tablets. Make these animations vertical-only on small screens. */
+  [data-aos="fade-left"],
+  [data-aos="fade-right"],
+  [data-aos="fade-up-left"],
+  [data-aos="fade-up-right"],
+  [data-aos="fade-down-left"],
+  [data-aos="fade-down-right"] {
+    transform: translate3d(0, 40px, 0);
+  }
+  [data-aos="fade-left"].aos-animate,
+  [data-aos="fade-right"].aos-animate,
+  [data-aos="fade-up-left"].aos-animate,
+  [data-aos="fade-up-right"].aos-animate,
+  [data-aos="fade-down-left"].aos-animate,
+  [data-aos="fade-down-right"].aos-animate {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 /* ---- Phones (≤767px) ---- */
