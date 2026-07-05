@@ -1010,6 +1010,17 @@ body { padding-bottom: 26px; }
 /* ============================================================
    Responsive
    ============================================================ */
+
+/* Prevent any child from forcing horizontal page scroll */
+img, svg, .code-window, .project-card, .cert-card { max-width: 100%; }
+
+/* ---- Large tablets / small laptops (≤1199px) ---- */
+@media (max-width: 1199px) {
+  .section { padding: 84px 0; }
+  .hero { padding: 130px 0 70px; }
+}
+
+/* ---- Tablets & collapsed navbar (≤991px) ---- */
 @media (max-width: 991px) {
   .glass-nav.scrolled,
   .navbar-collapse {
@@ -1019,16 +1030,74 @@ body { padding-bottom: 26px; }
     margin-top: 10px;
     border: 1px solid var(--border);
   }
-  .hero { text-align: center; padding-top: 120px; }
+  .navbar-nav { gap: 2px; padding: 4px 0; }
+  .glass-nav .nav-link { padding: 10px 12px !important; }
+  .navbar-nav .btn-accent { display: inline-block; margin-top: 8px; }
+
+  .hero {
+    text-align: center;
+    padding: 118px 0 60px;
+    min-height: auto;
+  }
   .hero-sub { margin-inline: auto; }
   .hero-prompt { text-align: center; }
   .social-row, .d-flex.flex-wrap { justify-content: center; }
   .float-badge { display: none; }
+
+  /* Give the hero code window breathing room once it stacks */
+  .tilt-wrap { margin-top: 34px; max-width: 520px; margin-inline: auto; }
+
+  .section { padding: 72px 0; }
 }
 
+/* ---- Phones (≤767px) ---- */
+@media (max-width: 767px) {
+  body { font-size: 14px; }
+  .section { padding: 60px 0; }
+  .hero { padding: 104px 0 48px; }
+
+  /* Shrink the code windows so long lines fit without awkward scrolling */
+  .code-body { padding: 14px 14px 16px; font-size: 0.82rem; line-height: 1.75; }
+  .code-line { padding-left: 2.6em; }
+  .code-line.i1 { padding-left: 3.8em; }
+  .code-line.i2 { padding-left: 5em; }
+  .hero-code .code-body { min-height: auto; }
+
+  .stat-row { padding: 12px 10px; }
+  .stat-row .stat-num { font-size: 1.15rem; }
+  .stat-row small { font-size: 0.66rem; }
+
+  /* Make the hero call-to-action buttons full-width and easy to tap */
+  .hero .btn-lg { width: 100%; }
+  .hero .d-flex.flex-wrap.gap-3 { flex-direction: column; align-items: stretch; }
+
+  .section-title { font-size: clamp(1.4rem, 6vw, 1.9rem); }
+  .counter { font-size: 2rem; }
+
+  /* Tighten the timeline indentation on small screens */
+  .timeline { padding-left: 20px; margin-left: 6px; }
+  .timeline-dot { left: -29px; }
+  .timeline-content { padding: 18px; }
+}
+
+/* ---- Small phones (≤600px) ---- */
 @media (max-width: 600px) {
   .status-item:not(.accent):nth-child(n+2) { display: none; }
   .status-bar { font-size: 0.68rem; }
+  .back-top { right: 16px; bottom: 40px; width: 42px; height: 42px; }
+}
+
+/* ---- Very small phones (≤400px) ---- */
+@media (max-width: 400px) {
+  .navbar-brand { font-size: 1rem; }
+  .logo-mark { width: 32px; height: 32px; }
+  .hero { padding-top: 96px; }
+  .section { padding: 48px 0; }
+  .code-body { font-size: 0.76rem; }
+  .stat-row { flex-wrap: wrap; gap: 10px; }
+  .stat-row > div { flex: 1 0 40%; text-align: center; }
+  .mini-card { padding: 14px; }
+  .skills-tabs-container .nav-link { padding: 6px 12px; font-size: 0.82rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
