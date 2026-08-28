@@ -1,6 +1,6 @@
 import { Suspense, lazy, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowDown, Download, Github, Linkedin, Mail } from 'lucide-react'
+import { ArrowDown, ArrowUpRight, Github, Linkedin, Mail } from 'lucide-react'
 import SectionBoundary from '../components/SectionBoundary'
 import Marquee from '../components/Marquee'
 import HeroFallback from '../components/3d/HeroFallback'
@@ -94,7 +94,7 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              View Résumé <Download size={18} />
+              View LinkedIn <ArrowUpRight size={18} />
             </a>
           </motion.div>
 

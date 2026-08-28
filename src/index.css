@@ -648,6 +648,23 @@ section { position: relative; padding: 110px 0; }
 .expertise-desc { color: var(--muted); font-size: 14px; margin: 6px 0 12px; }
 .expertise-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 
+.expertise-item.secondary {
+  margin-top: 8px;
+  border: 1px dashed var(--border);
+  background: transparent;
+  opacity: 0.92;
+}
+.expertise-item.secondary:hover {
+  border-color: var(--border);
+  background: var(--card);
+}
+.expertise-item.secondary .expertise-num { color: var(--muted); }
+.expertise-item.secondary .expertise-title {
+  font-size: 16px;
+  color: var(--muted);
+}
+.expertise-item.secondary .expertise-desc { font-size: 13px; }
+
 .tech-chip {
   font-family: var(--mono);
   font-size: 11.5px;
@@ -1215,7 +1232,7 @@ section { position: relative; padding: 110px 0; }
 
 /* ---------- CONTACT ---------- */
 .contact {
-  padding: 130px 0;
+  padding: 90px 0;
   position: relative;
   overflow: hidden;
 }
@@ -1238,7 +1255,7 @@ section { position: relative; padding: 110px 0; }
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1;
-  margin-bottom: 70px;
+  margin-bottom: 36px;
 }
 .contact-headline-word { display: block; overflow: hidden; }
 .contact-char { display: inline-block; transform-origin: bottom; }

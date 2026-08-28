@@ -22,7 +22,7 @@ export default function Expertise() {
             {EXPERTISE.map((cat, i) => (
               <motion.div
                 key={cat.id}
-                className="expertise-item"
+                className={`expertise-item${cat.secondary ? ' secondary' : ''}`}
                 initial={{ opacity: 0, y: 22 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}

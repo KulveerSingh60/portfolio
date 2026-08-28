@@ -33,40 +33,41 @@ export const STATS = [
   { value: 12, suffix: '+', label: 'Months', sub: 'Experience' },
   { value: 3, suffix: '', label: 'Internships', sub: '& Training' },
   { value: 4, suffix: '', label: 'Certifications', sub: 'Earned' },
-  { value: 20, suffix: '+', label: 'Technologies', sub: 'In my stack' },
+  { value: 12, suffix: '+', label: 'Technologies', sub: 'In my stack' },
 ]
 
-/* Labrador-format expertise: what I can DO, grouped by category */
+/* Labrador-format expertise: primary dev stack first, additional skills separated */
 export const EXPERTISE = [
   {
-    id: 'web',
-    title: 'Web Development',
-    desc: 'Full-stack applications with clean, maintainable, real-world architecture.',
-    skills: ['PHP', 'JavaScript', 'AJAX', 'WordPress'],
+    id: 'frontend',
+    title: 'Frontend',
+    desc: 'Responsive, accessible interfaces that look right on every screen.',
+    skills: ['HTML5', 'CSS3', 'JavaScript', 'React', 'Bootstrap'],
   },
   {
     id: 'backend',
     title: 'Backend & Data',
     desc: 'Server-side logic, databases, and the queries that keep things fast.',
-    skills: ['MySQL', 'Optimized Indexing', 'Query Design'],
-  },
-  {
-    id: 'frontend',
-    title: 'Frontend',
-    desc: 'Responsive, accessible interfaces that look right on every screen.',
-    skills: ['HTML5', 'CSS3', 'Bootstrap', 'Responsive Design'],
+    skills: ['PHP', 'MySQL', 'AJAX', 'Optimized Indexing'],
   },
   {
     id: 'tools',
     title: 'Tools & Workflow',
     desc: 'Version control, editors, and the tooling around shipping software.',
-    skills: ['Git & GitHub', 'VS Code', 'Canva', 'Drag & Drop Builders'],
+    skills: ['Git & GitHub', 'VS Code', 'Responsive Design'],
   },
   {
-    id: 'growth',
-    title: 'Growth & Content',
-    desc: 'Marketing and content skills that make technical work actually reach people.',
-    skills: ['SEO', 'SMM', 'Campaign Analytics', 'Data Entry', 'MS Office', 'Tally'],
+    id: 'cms',
+    title: 'WordPress & CMS',
+    desc: 'Building and maintaining real WordPress sites end-to-end.',
+    skills: ['WordPress', 'Themes', 'Plugins'],
+  },
+  {
+    id: 'additional',
+    title: 'Additional Skills',
+    desc: 'Secondary — business and growth skills from my marketing & accounts training.',
+    skills: ['SEO', 'SMM', 'Campaign Analytics', 'Data Entry', 'MS Office', 'Tally', 'Canva'],
+    secondary: true,
   },
 ]
 
@@ -79,7 +80,7 @@ export const PROCESS = [
   { step: '05', title: 'Deploy', desc: 'Ship, monitor, and refine.' },
 ]
 
-export const PROJECT_FILTERS = ['All', 'PHP', 'MySQL', 'JavaScript', 'WordPress', 'Conference']
+export const PROJECT_FILTERS = ['All', 'PHP', 'MySQL', 'JavaScript', 'WordPress']
 
 export const PROJECTS = [
   {
@@ -96,7 +97,7 @@ export const PROJECTS = [
     features: ['Role-based authentication', 'Real-time inventory visibility', 'Optimized MySQL indexing', 'Live AJAX updates without refresh'],
     tech: ['PHP', 'MySQL', 'AJAX', 'Bootstrap'],
     filters: ['PHP', 'MySQL', 'JavaScript'],
-    role: 'Lead Developer · Sorted Solution',
+    role: 'Lead Developer · Sortiq Solution',
     github: 'https://github.com/KulveerSingh60/Inventory-Stock-MAnagement-System',
     visual: 'inventory',
     accent: '#2bd98b',
@@ -104,25 +105,6 @@ export const PROJECTS = [
   {
     id: 2,
     number: '02',
-    title: 'Full-Stack Web Development',
-    tag: 'Internship · 6 Months',
-    description:
-      'At Sortiq Solution, developed end-to-end web applications with PHP, MySQL, HTML5, CSS3, Bootstrap, and JavaScript. Participated across the full SDLC including database modelling and QA testing.',
-    problem:
-      'Real client requirements that span the complete web application lifecycle — from data modelling to QA.',
-    solution:
-      'Worked end-to-end across the SDLC: built applications with PHP, MySQL, HTML5, CSS3, Bootstrap and JavaScript, modelled databases, and tested for quality.',
-    features: ['End-to-end web apps', 'Database modelling', 'QA testing', 'Full SDLC participation'],
-    tech: ['PHP', 'JavaScript', 'HTML5', 'CSS3'],
-    filters: ['PHP', 'JavaScript'],
-    role: 'Full-Stack Developer Intern · Sortiq Solution',
-    github: LINKS.projects,
-    visual: 'laptop',
-    accent: '#22d3ee',
-  },
-  {
-    id: 3,
-    number: '03',
     title: 'Digital Marketing · GreenBasket',
     tag: 'Training · 45 Days',
     description:
@@ -138,24 +120,6 @@ export const PROJECTS = [
     github: LINKS.github,
     visual: 'marketing',
     accent: '#e1306c',
-  },
-  {
-    id: 4,
-    number: '04',
-    title: 'ICIAI-2025 Participation',
-    tag: 'Conference · Apr 25–26 2025',
-    description:
-      'Participated in the International Conference on Innovations and Applications of AI at Guru Kashi University. Gained key knowledge on advanced AI trends, research frameworks, and modern AI implementations.',
-    problem: 'Keeping pace with where artificial intelligence is heading within modern application development.',
-    solution:
-      'Attended ICIAI-2025 at Guru Kashi University to study advanced AI trends, research frameworks, and modern AI implementations first-hand.',
-    features: ['AI trends & research', 'Innovation frameworks', 'Modern AI implementations', 'University conference'],
-    tech: ['AI', 'Innoavation', 'Research'],
-    filters: ['Conference'],
-    role: 'Participant · Guru Kashi University',
-    github: LINKS.github,
-    visual: 'conference',
-    accent: '#a78bfa',
   },
 ]
 
@@ -241,4 +205,4 @@ export const CERTIFICATIONS = [
   { title: 'International Conference · ICIAI-2025', issuer: 'Guru Kashi University', duration: 'Apr 2025' },
 ]
 
-export const MARQUEE_WORDS = ['FULL-STACK DEVELOPER', 'PHP', 'LARAVEL', 'MYSQL', 'JAVASCRIPT', 'REACT', '3D']
+export const MARQUEE_WORDS = ['FULL-STACK DEVELOPER', 'PHP', 'MYSQL', 'JAVASCRIPT', 'REACT', 'WORDPRESS']

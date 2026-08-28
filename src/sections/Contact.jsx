@@ -15,7 +15,7 @@ export default function Contact() {
     e.preventDefault()
     const subject = encodeURIComponent(`Portfolio contact from ${form.name || 'a visitor'}`)
     const body = encodeURIComponent(`${form.message}\n\n— ${form.name}\n${form.email}`)
-    window.location.href = `${LINKS.emailRaw}?subject=${subject}&body=${body}`
+    window.location.href = `${LINKS.email}?subject=${subject}&body=${body}`
     setSent(true)
   }
 
@@ -52,7 +52,7 @@ export default function Contact() {
             {sent ? (
               <div className="sent-state">
                 <CheckCircle2 size={44} />
-                <p>Message queued — I'll get back to you soon.</p>
+                <p>Your email client should now be open. Thanks for reaching out!</p>
                 <button className="btn btn-ghost sm" onClick={() => setSent(false)}>Send another</button>
               </div>
             ) : (
