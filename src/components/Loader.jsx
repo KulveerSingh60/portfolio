@@ -50,7 +50,7 @@ export default function Loader({ onDone }) {
     >
       <div className="loader-inner">
         <div className="loader-mark mono">K<span>.</span></div>
-        <div className="loader-label mono">culveer/<span className="accent">dev</span></div>
+        <div className="loader-label mono">kulveer/<span className="accent">dev</span></div>
         <div className="loader-progress">
           <motion.span
             className="loader-progress-bar"

@@ -28,21 +28,10 @@ export default function Contact() {
           <span className="eyebrow mono">Contact</span>
         </div>
 
-        <h2 className="contact-headline" aria-label="Let's build something">
+        <h2 className="contact-headline">
           {HEAD.map((word, wi) => (
-            <span className="contact-headline-word" key={wi} aria-hidden="true">
-              {word.split('').map((c, ci) => (
-                <motion.span
-                  className={`contact-char mono ${wi === HEAD.length - 1 ? 'accent' : ''}`}
-                  key={ci}
-                  initial={{ y: '110%', opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true, amount: 0.6 }}
-                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: wi * 0.12 + ci * 0.02 }}
-                >
-                  {c}
-                </motion.span>
-              ))}
+            <span className={`contact-headline-word${wi === HEAD.length - 1 ? ' accent' : ''}`} key={wi}>
+              {word}
             </span>
           ))}
         </h2>

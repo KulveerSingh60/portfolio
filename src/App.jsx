@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Loader from './components/Loader'
 import Cursor from './components/Cursor'
 import SectionBoundary from './components/SectionBoundary'
 import Navbar from './components/Navbar'
+import { initSound } from './lib/sound'
 import Hero from './sections/Hero'
 import About from './sections/About'
 import Expertise from './sections/Expertise'
@@ -16,6 +17,10 @@ import Footer from './sections/Footer'
 
 export default function App() {
   const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    initSound()
+  }, [])
 
   return (
     <>

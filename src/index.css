@@ -235,6 +235,18 @@ section { position: relative; padding: 110px 0; }
   transition: border-color 0.2s, background 0.2s;
 }
 .nav-resume:hover { border-color: var(--accent); background: var(--accent-soft); }
+.nav-sound {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding: 6px 10px;
+  border-radius: 999px;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.nav-sound:hover { color: var(--text); border-color: var(--accent); }
+.nav-sound[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
 .nav-toggle { display: none; background: none; border: none; color: var(--text); }
 
 .mobile-menu {
@@ -1174,6 +1186,10 @@ section { position: relative; padding: 110px 0; }
 }
 
 /* ---------- GITHUB ---------- */
+.github {
+  padding-top: 80px;
+  padding-bottom: 28px;
+}
 .gh-note {
   display: flex;
   align-items: center;
@@ -1232,7 +1248,7 @@ section { position: relative; padding: 110px 0; }
 
 /* ---------- CONTACT ---------- */
 .contact {
-  padding: 90px 0;
+  padding: 70px 0 100px;
   position: relative;
   overflow: hidden;
 }
@@ -1248,18 +1264,16 @@ section { position: relative; padding: 110px 0; }
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 40px;
 }
 .contact-headline {
-  font-size: clamp(44px, 8.5vw, 110px);
+  font-size: clamp(40px, 7vw, 88px);
   font-weight: 700;
   letter-spacing: -0.03em;
-  line-height: 1;
-  margin-bottom: 36px;
+  line-height: 1.02;
+  margin-bottom: 40px;
 }
-.contact-headline-word { display: block; overflow: hidden; }
-.contact-char { display: inline-block; transform-origin: bottom; }
-.contact-char.accent { color: var(--accent); }
+.contact-headline-word { display: block; }
 
 .contact-grid {
   display: grid;

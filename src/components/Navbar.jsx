@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Github, ArrowUpRight } from 'lucide-react'
 import { LINKS, SOCIALS } from '../data'
+import SoundToggle from './SoundToggle'
 
 const NAV_LINKS = [
   { id: 'home', label: 'Home', num: '01' },
@@ -72,13 +73,15 @@ export default function Navbar() {
             ))}
           </nav>
 
+          <SoundToggle />
+
           <a
             className="nav-resume"
             href={SOCIALS[1].url}
             target="_blank"
             rel="noopener noreferrer"
           >
-            Résumé <ArrowUpRight size={14} />
+            View LinkedIn <ArrowUpRight size={14} />
           </a>
 
           <button
