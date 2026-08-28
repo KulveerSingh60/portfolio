@@ -176,7 +176,7 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) for deta
 - **Live Demo:** [kulveersingh60.github.io/portfolio](https://kulveersingh60.github.io/portfolio)
 - **My Projects:** [github.com/KulveerSingh60/projects](https://github.com/KulveerSingh60/projects)
 - **GitHub:** [@KulveerSingh60](https://github.com/KulveerSingh60)
-- **LinkedIn:** [Kulveer Singh](https://linkedin.com/in/kulveer-singh-136a56308)
+- **LinkedIn:** [Kulveer Singh](https://www.linkedin.com/in/kulveer-singh-/)
 - **Email:** kulveerxsingh60@gmail.com
 
 ---
