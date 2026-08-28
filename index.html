@@ -50,6 +50,18 @@
       <div class="preloader-text"><span class="preloader-log">$ npm start</span><span class="preloader-pct">0%</span></div>
     </div>
   </div>
+  <script>
+    // Safety net: never let the loader block the page, even if script.js fails
+    window.addEventListener("load", function () {
+      setTimeout(function () {
+        var p = document.getElementById("preloader");
+        if (p && !p.classList.contains("done")) {
+          p.classList.add("done");
+          document.body.classList.remove("is-loading");
+        }
+      }, 1500);
+    });
+  </script>
 
   <!-- Scroll progress bar -->
   <div class="scroll-progress" id="scrollProgress"></div>
