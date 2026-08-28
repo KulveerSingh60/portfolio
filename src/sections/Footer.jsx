@@ -1,21 +1,39 @@
-import { Github, Linkedin, Mail, Heart } from 'lucide-react'
-import { LINKS } from '../data'
+import { Github, Linkedin, Mail, Heart, ArrowUp } from 'lucide-react'
+import { LINKS, SOCIALS } from '../data'
 
 const year = new Date().getFullYear()
 
 export default function Footer() {
+  const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
+
   return (
     <footer className="footer">
       <div className="container footer-inner">
-        <p className="footer-brand mono">kulveer<span className="accent">.dev</span></p>
+        <button className="footer-meta mono" onClick={scrollTop} aria-label="Back to top">
+          <span className="logo-mark mono">K<span className="accent">.</span></span>
+          KULVEER.SINGH
+          <span className="footer-top"><ArrowUp size={14} /> Top</span>
+        </button>
+
         <div className="footer-social">
-          <a href={LINKS.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Github size={16} /></a>
-          <a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin size={16} /></a>
-          <a href={LINKS.email} aria-label="Email"><Mail size={16} /></a>
+          {SOCIALS.map((s) => (
+            <a
+              key={s.name}
+              href={s.url}
+              target={s.name === 'Email' ? undefined : '_blank'}
+              rel={s.name === 'Email' ? undefined : 'noopener noreferrer'}
+              aria-label={s.name}
+            >
+              {s.name === 'Email' ? <Mail size={16} /> : s.name === 'GitHub' ? <Github size={16} /> : <Linkedin size={16} />}
+            </a>
+          ))}
         </div>
-        <p className="footer-note">
-          © {year} Kulveer Singh · Built with <Heart size={13} className="heart" /> and code · Designed in Punjab, India
-        </p>
+
+        <div className="footer-note mono">
+          <span>© {year} Kulveer Singh</span>
+          <span className="footer-divider">·</span>
+          <span>Built with <Heart size={13} className="heart" /> in Punjab, India</span>
+        </div>
       </div>
     </footer>
   )

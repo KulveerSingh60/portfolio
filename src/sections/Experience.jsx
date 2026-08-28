@@ -1,79 +1,47 @@
 import { motion } from 'framer-motion'
-import { Briefcase, GraduationCap, Languages as LangIcon } from 'lucide-react'
-import { EXPERIENCE, LANGUAGES } from '../data'
-
-const work = EXPERIENCE.filter((e) => e.type === 'work')
-const education = EXPERIENCE.filter((e) => e.type === 'education')
+import { Briefcase, GraduationCap } from 'lucide-react'
+import SectionHead from '../components/SectionHead'
+import { EXPERIENCE } from '../data'
 
 export default function Experience() {
   return (
-    <section id="experience" className="section">
+    <section id="experience" className="section experience">
       <div className="container">
-        <div className="section-head">
-          <p className="eyebrow justify-center"><span className="pulse-dot" /> My Path</p>
-          <h2 className="section-title">Experience &amp; <span className="accent">Education</span></h2>
-        </div>
+        <SectionHead
+          chapter="04"
+          eyebrow="Journey"
+          title="Experience &amp; <span class='accent'>Education.</span>"
+          sub="A timeline of real roles, internships, training and study."
+        />
 
-        <div className="exp-grid">
-          <div className="exp-col">
-            <h3 className="exp-head"><Briefcase size={18} /> Experience & Internships</h3>
-            <div className="timeline">
-              {work.map((e, i) => (
-                <motion.div
-                  className="timeline-item"
-                  key={e.role}
-                  initial={{ opacity: 0, x: -24 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ delay: i * 0.1 }}
-                >
-                  <span className="t-dot" />
-                  <div className="t-content">
-                    <span className="t-duration mono">{e.duration}</span>
-                    <h4>{e.role}</h4>
-                    <h5 className="t-company">{e.company}</h5>
-                    {e.location && <p className="t-loc mono">{e.location}</p>}
-                    <p className="t-desc">{e.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <div className="exp-col">
-            <h3 className="exp-head"><GraduationCap size={18} /> Education</h3>
-            <div className="timeline">
-              {education.map((e, i) => (
-                <motion.div
-                  className="timeline-item"
-                  key={e.role}
-                  initial={{ opacity: 0, x: 24 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ delay: i * 0.1 }}
-                >
-                  <span className="t-dot accent-dot" />
-                  <div className="t-content">
-                    <span className="t-duration mono">{e.duration}</span>
-                    <h4>{e.role}</h4>
-                    <h5 className="t-company">{e.company}</h5>
-                    {e.location && <p className="t-loc mono">{e.location}</p>}
-                    <p className="t-desc">{e.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            <h3 className="exp-head lang-head"><LangIcon size={18} /> Languages</h3>
-            <div className="langs">
-              {LANGUAGES.map((l) => (
-                <div className="lang-chip" key={l.name}>
-                  <span className="lang-name">{l.name}</span>
-                  <span className="lang-level mono">{l.level}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="timeline">
+          {EXPERIENCE.map((item, i) => (
+            <motion.div
+              key={item.role}
+              className={`timeline-row ${item.type === 'education' ? 'edu' : ''}`}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.05 }}
+            >
+              <div className="timeline-marker" aria-hidden="true">
+                {item.type === 'education' ? <GraduationCap size={18} /> : <Briefcase size={18} />}
+              </div>
+              <div className="timeline-dot" aria-hidden="true" />
+              <div className="timeline-meta mono">
+                <span className="timeline-period">{item.duration}</span>
+                <span className="timeline-type">{item.type === 'education' ? 'Education' : 'Work'}</span>
+              </div>
+              <div className="timeline-card">
+                <h3 className="timeline-role">{item.role}</h3>
+                <p className="timeline-org mono">
+                  {item.org}
+                  {item.loc ? ` · ${item.loc}` : ''}
+                </p>
+                <p className="timeline-desc">{item.desc}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

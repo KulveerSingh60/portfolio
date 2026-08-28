@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Github, Star, GitFork, ExternalLink, ArrowUpRight, AlertCircle } from 'lucide-react'
+import { Github, Star, GitFork, ArrowUpRight, AlertTriangle } from 'lucide-react'
+import SectionHead from '../components/SectionHead'
 import { LINKS } from '../data'
 
 const FALLBACK = [
-  { name: 'portfolio', description: 'Modern 3D portfolio — Kulveer Singh', language: 'JavaScript', stars: 0, forks: 0 },
-  { name: 'Inventory-Stock-MAnagement-System', description: 'Full-stack PHP & MySQL inventory system', language: 'PHP', stars: 0, forks: 0 },
+  { name: 'portfolio', description: 'Modern 3D portfolio — Kulveer Singh', language: 'JavaScript' },
+  { name: 'Inventory-Stock-MAnagement-System', description: 'Full-stack PHP & MySQL inventory system', language: 'PHP' },
+  { name: 'projects', description: 'Full-stack web development projects', language: 'PHP' },
 ]
 
 export default function GitHub() {
   const [repos, setRepos] = useState(null)
-  const [error, setError] = useState(false)
+  const [usingFallback, setUsingFallback] = useState(false)
 
   useEffect(() => {
     let cancel = false
@@ -20,36 +22,43 @@ export default function GitHub() {
         if (!res.ok) throw new Error('failed')
         const data = await res.json()
         if (!cancel && Array.isArray(data)) setRepos(data.filter((r) => !r.fork))
+        else if (!cancel) throw new Error('bad')
       } catch {
-        if (!cancel) { setError(true); setRepos(FALLBACK) }
+        if (!cancel) {
+          setUsingFallback(true)
+          setRepos(FALLBACK)
+        }
       }
     })()
     return () => (cancel = true)
   }, [])
 
   return (
-    <section id="github" className="section">
+    <section id="github" className="section github">
       <div className="container">
-        <div className="section-head">
-          <p className="eyebrow justify-center"><span className="pulse-dot" /> My Code</p>
-          <h2 className="section-title">GitHub <span className="accent">Repositories</span></h2>
-          <p className="section-sub">
-            A snapshot of my public work. Full profile at{' '}
-            <a className="inline-link" href={LINKS.github} target="_blank" rel="noopener noreferrer">
-              github.com/KulveerSingh60
-            </a>
-          </p>
-        </div>
+        <SectionHead
+          chapter="06"
+          eyebrow="GitHub"
+          title="Proof of <span class='accent'>work.</span>"
+          sub={
+            <>
+              A live snapshot from{' '}
+              <a className="inline-link" href={LINKS.github} target="_blank" rel="noopener noreferrer">
+                github.com/KulveerSingh60
+              </a>
+            </>
+          }
+        />
 
-        {error && (
-          <div className="gh-error">
-            <AlertCircle size={16} /> Could not reach the GitHub API — showing cached highlights.
+        {usingFallback && (
+          <div className="gh-note">
+            <AlertTriangle size={15} /> Couldn't reach the GitHub API — showing cached highlights.
           </div>
         )}
 
         <div className="gh-grid">
           {repos === null
-            ? Array.from({ length: 3 }).map((_, i) => <div className="gh-skeleton" key={i} />)
+            ? Array.from({ length: 6 }).map((_, i) => <div className="gh-skeleton" key={i} />)
             : repos.slice(0, 6).map((r, i) => (
                 <motion.a
                   key={r.name}
@@ -64,14 +73,18 @@ export default function GitHub() {
                 >
                   <div className="gh-top">
                     <Github size={18} />
-                    <span className="gh-ext"><ExternalLink size={15} /></span>
+                    <ArrowUpRight size={15} />
                   </div>
                   <h4 className="gh-name mono">{r.name}</h4>
                   <p className="gh-desc">{r.description || 'No description'}</p>
-                  <div className="gh-meta">
-                    {r.language && <span className="gh-lang"><i /> {r.language}</span>}
-                    <span className="gh-stats"><Star size={14} /> {r.stargazers_count || 0}</span>
-                    <span className="gh-stats"><GitFork size={14} /> {r.forks_count || 0}</span>
+                  <div className="gh-meta mono">
+                    {r.language && <span className="gh-lang">{r.language}</span>}
+                    {typeof r.stargazers_count !== 'undefined' && (
+                      <span className="gh-stat"><Star size={14} /> {r.stargazers_count}</span>
+                    )}
+                    {typeof r.forks_count !== 'undefined' && (
+                      <span className="gh-stat"><GitFork size={14} /> {r.forks_count}</span>
+                    )}
                   </div>
                 </motion.a>
               ))}
@@ -79,7 +92,7 @@ export default function GitHub() {
 
         <div className="gh-cta">
           <a className="btn btn-ghost" href={LINKS.github} target="_blank" rel="noopener noreferrer">
-            View GitHub Profile <ArrowUpRight size={18} />
+            View Full GitHub Profile <ArrowUpRight size={18} />
           </a>
         </div>
       </div>

@@ -1,32 +1,39 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Github } from 'lucide-react'
-import { LINKS } from '../data'
+import { Menu, X, Github, ArrowUpRight } from 'lucide-react'
+import { LINKS, SOCIALS } from '../data'
 
 const NAV_LINKS = [
-  { id: 'home', label: 'Home' },
-  { id: 'about', label: 'About' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'github', label: 'GitHub' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'home', label: 'Home', num: '01' },
+  { id: 'about', label: 'About', num: '02' },
+  { id: 'expertise', label: 'Expertise', num: '03' },
+  { id: 'work', label: 'Work', num: '04' },
+  { id: 'experience', label: 'Journey', num: '05' },
+  { id: 'lab', label: 'Lab', num: '06' },
+  { id: 'github', label: 'GitHub', num: '07' },
+  { id: 'contact', label: 'Contact', num: '08' },
 ]
 
 export default function Navbar() {
+  const [hidden, setHidden] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [active, setActive] = useState('home')
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
+    let lastY = window.scrollY
     const onScroll = () => {
-      setScrolled(window.scrollY > 30)
+      const y = window.scrollY
+      setScrolled(y > 30)
+      setHidden(y > 140 && y > lastY)
+
       let current = 'home'
       for (const link of NAV_LINKS) {
         const el = document.getElementById(link.id)
-        if (el && el.getBoundingClientRect().top <= 120) current = link.id
+        if (el && el.getBoundingClientRect().top <= 140) current = link.id
       }
       setActive(current)
+      lastY = y
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
@@ -46,11 +53,11 @@ export default function Navbar() {
 
   return (
     <>
-      <header className={`nav ${scrolled ? 'scrolled' : ''}`}>
+      <header className={`nav${scrolled ? ' scrolled' : ''}${hidden ? ' hidden' : ''}`}>
         <div className="nav-inner container">
-          <button className="nav-logo" onClick={() => go('home')} aria-label="Go to top">
-            <span className="logo-mark">K</span>
-            <span className="logo-text">kulveer<span className="accent">.dev</span></span>
+          <button className="nav-logo" onClick={() => go('home')} aria-label="Back to top">
+            <span className="logo-mark mono">K<span className="accent">.</span></span>
+            <span className="logo-text mono">KULVEER.SINGH</span>
           </button>
 
           <nav className="nav-links" aria-label="Primary">
@@ -63,15 +70,16 @@ export default function Navbar() {
                 {l.label}
               </button>
             ))}
-            <a
-              className="nav-cta"
-              href={LINKS.github}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Github size={16} /> GitHub
-            </a>
           </nav>
+
+          <a
+            className="nav-resume"
+            href={SOCIALS[1].url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Résumé <ArrowUpRight size={14} />
+          </a>
 
           <button
             className="nav-toggle"
@@ -97,28 +105,29 @@ export default function Navbar() {
               className="mobile-links"
               initial="hidden"
               animate="show"
-              variants={{ show: { transition: { staggerChildren: 0.06 } } }}
+              variants={{ show: { transition: { staggerChildren: 0.05 } } }}
+              aria-label="Mobile"
             >
               {NAV_LINKS.map((l) => (
                 <motion.button
                   key={l.id}
-                  variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }}
+                  variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }}
                   className="mobile-link"
                   onClick={() => go(l.id)}
                 >
-                  <span className="num">0{NAV_LINKS.indexOf(l) + 1}</span> {l.label}
+                  <span className="num mono">{l.num}</span>
+                  <span className="mobile-link-label">{l.label}</span>
+                  <ArrowUpRight size={18} className="mobile-link-arrow" />
                 </motion.button>
               ))}
-              <motion.a
-                variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }}
-                className="mobile-link mobile-github"
-                href={LINKS.github}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Github size={16} /> github.com/KulveerSingh60
-              </motion.a>
             </motion.nav>
+            <div className="mobile-menu-social">
+              {SOCIALS.map((s) => (
+                <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer">
+                  {s.name}
+                </a>
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

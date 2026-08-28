@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Send, Github, Linkedin, Mail, MapPin, CheckCircle2 } from 'lucide-react'
-import { LINKS } from '../data'
+import { Send, Github, Linkedin, Mail, MapPin, CheckCircle2, ArrowUpRight } from 'lucide-react'
+import { LINKS, SOCIALS } from '../data'
+
+const HEAD = ['LET\'S', 'BUILD', 'SOMETHING.']
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
@@ -21,68 +23,80 @@ export default function Contact() {
     <section id="contact" className="contact">
       <div className="contact-glow" aria-hidden="true" />
       <div className="container">
-        <div className="contact-wrap">
-          <div className="section-head">
-            <p className="eyebrow justify-center"><span className="pulse-dot" /> Get In Touch</p>
-            <h2 className="section-title">Let's build something <span className="accent">together.</span></h2>
-            <p className="section-sub">
-              Looking for a developer who learns fast and delivers quality work? Feel free to reach
-              out directly via email or connect with me on LinkedIn.
-            </p>
+        <div className="contact-top">
+          <span className="chapter mono">07</span>
+          <span className="eyebrow mono">Contact</span>
+        </div>
+
+        <h2 className="contact-headline" aria-label="Let's build something">
+          {HEAD.map((word, wi) => (
+            <span className="contact-headline-word" key={wi} aria-hidden="true">
+              {word.split('').map((c, ci) => (
+                <motion.span
+                  className={`contact-char mono ${wi === HEAD.length - 1 ? 'accent' : ''}`}
+                  key={ci}
+                  initial={{ y: '110%', opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  viewport={{ once: true, amount: 0.6 }}
+                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: wi * 0.12 + ci * 0.02 }}
+                >
+                  {c}
+                </motion.span>
+              ))}
+            </span>
+          ))}
+        </h2>
+
+        <div className="contact-grid">
+          <div className="contact-form-wrap">
+            {sent ? (
+              <div className="sent-state">
+                <CheckCircle2 size={44} />
+                <p>Message queued — I'll get back to you soon.</p>
+                <button className="btn btn-ghost sm" onClick={() => setSent(false)}>Send another</button>
+              </div>
+            ) : (
+              <form onSubmit={submit} className="contact-form">
+                <div className="field">
+                  <label htmlFor="name">Name</label>
+                  <input id="name" name="name" value={form.name} onChange={update} required placeholder="Your name" />
+                </div>
+                <div className="field">
+                  <label htmlFor="email">Email</label>
+                  <input id="email" name="email" type="email" value={form.email} onChange={update} required placeholder="you@example.com" />
+                </div>
+                <div className="field">
+                  <label htmlFor="message">Message</label>
+                  <textarea id="message" name="message" value={form.message} onChange={update} required rows={5} placeholder="Tell me about your project or opportunity..." />
+                </div>
+                <button type="submit" className="btn btn-primary">
+                  Send Message <Send size={16} />
+                </button>
+              </form>
+            )}
           </div>
 
-          <div className="contact-grid">
-            <div className="contact-card">
-              <h3 className="contact-card-title mono">$ send_message</h3>
-              {sent ? (
-                <div className="sent-state">
-                  <CheckCircle2 size={40} />
-                  <p>Message queued — I'll reply within 24h.</p>
-                  <button className="btn btn-ghost sm" onClick={() => setSent(false)}>Send another</button>
-                </div>
-              ) : (
-                <form onSubmit={submit} className="contact-form">
-                  <div className="field">
-                    <label htmlFor="name">Name</label>
-                    <input id="name" name="name" value={form.name} onChange={update} required placeholder="Your name" />
-                  </div>
-                  <div className="field">
-                    <label htmlFor="email">Email</label>
-                    <input id="email" name="email" type="email" value={form.email} onChange={update} required placeholder="you@example.com" />
-                  </div>
-                  <div className="field">
-                    <label htmlFor="message">Message</label>
-                    <textarea id="message" name="message" value={form.message} onChange={update} required rows={5} placeholder="Tell me about your project..." />
-                  </div>
-                  <button type="submit" className="btn btn-primary full">
-                    Send Message <Send size={16} />
-                  </button>
-                </form>
-              )}
-            </div>
-
-            <div className="contact-links">
+          <div className="contact-links">
+            <div className="contact-links-head mono">Reach me</div>
+            {SOCIALS.map((s) => (
               <motion.a
+                key={s.name}
                 className="clink"
-                href={LINKS.email}
-                whileHover={{ y: -3 }}
+                href={s.url}
+                target={s.name === 'Email' ? undefined : '_blank'}
+                rel={s.name === 'Email' ? undefined : 'noopener noreferrer'}
+                whileHover={{ x: 4 }}
               >
-                <span className="clink-ic"><Mail size={20} /></span>
-                <span><strong>Email</strong><small>{LINKS.emailRaw}</small></span>
+                <span className="clink-ic">
+                  {s.name === 'Email' ? <Mail size={20} /> : s.name === 'GitHub' ? <Github size={20} /> : <Linkedin size={20} />}
+                </span>
+                <span className="clink-text">
+                  <strong>{s.name}</strong>
+                  <small className="mono">{s.handle}</small>
+                </span>
+                <ArrowUpRight size={16} className="clink-arrow" />
               </motion.a>
-              <motion.a className="clink" href={LINKS.github} target="_blank" rel="noopener noreferrer" whileHover={{ y: -3 }}>
-                <span className="clink-ic"><Github size={20} /></span>
-                <span><strong>GitHub</strong><small>@KulveerSingh60</small></span>
-              </motion.a>
-              <motion.a className="clink" href={LINKS.linkedin} target="_blank" rel="noopener noreferrer" whileHover={{ y: -3 }}>
-                <span className="clink-ic"><Linkedin size={20} /></span>
-                <span><strong>LinkedIn</strong><small>Kulveer Singh</small></span>
-              </motion.a>
-              <div className="clink static">
-                <span className="clink-ic"><MapPin size={20} /></span>
-                <span><strong>Location</strong><small>Gidderbaha, Punjab, India</small></span>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

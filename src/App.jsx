@@ -1,15 +1,16 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Loader from './components/Loader'
+import Cursor from './components/Cursor'
+import SectionBoundary from './components/SectionBoundary'
 import Navbar from './components/Navbar'
 import Hero from './sections/Hero'
 import About from './sections/About'
-import Statistics from './sections/Statistics'
-import Skills from './sections/Skills'
+import Expertise from './sections/Expertise'
 import Projects from './sections/Projects'
 import Experience from './sections/Experience'
+import Lab from './sections/Lab'
 import GitHub from './sections/GitHub'
-import Certifications from './sections/Certifications'
 import Contact from './sections/Contact'
 import Footer from './sections/Footer'
 
@@ -18,26 +19,28 @@ export default function App() {
 
   return (
     <>
+      <Cursor />
+
       <AnimatePresence>
         {loading && <Loader key="loader" onDone={() => setLoading(false)} />}
       </AnimatePresence>
 
       <motion.div
+        className="app"
         initial={{ opacity: 0 }}
         animate={{ opacity: loading ? 0 : 1 }}
         transition={{ duration: 0.5 }}
       >
         <Navbar />
         <main>
-          <Hero />
-          <About />
-          <Statistics />
-          <Skills />
-          <Projects />
-          <Experience />
-          <Certifications />
-          <GitHub />
-          <Contact />
+          <SectionBoundary><Hero /></SectionBoundary>
+          <SectionBoundary fallback={null}><About /></SectionBoundary>
+          <SectionBoundary fallback={null}><Expertise /></SectionBoundary>
+          <SectionBoundary fallback={<div className="container pad" />}><Projects /></SectionBoundary>
+          <SectionBoundary fallback={null}><Experience /></SectionBoundary>
+          <SectionBoundary fallback={null}><Lab /></SectionBoundary>
+          <SectionBoundary fallback={null}><GitHub /></SectionBoundary>
+          <SectionBoundary fallback={null}><Contact /></SectionBoundary>
         </main>
         <Footer />
       </motion.div>
