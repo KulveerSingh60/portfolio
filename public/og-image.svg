@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#050505"/>
+      <stop offset="1" stop-color="#0d1117"/>
+    </linearGradient>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2bd98b"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="960" cy="120" r="260" fill="rgba(43,217,139,0.08)"/>
+  <circle cx="220" cy="540" r="220" fill="rgba(34,211,238,0.06)"/>
+  <text x="90" y="300" font-family="Arial,Helvetica,sans-serif" font-size="88" font-weight="800" fill="#ffffff">Kulveer Singh</text>
+  <text x="94" y="360" font-family="Arial,Helvetica,sans-serif" font-size="40" font-weight="600" fill="url(#acc)">FULL-STACK DEVELOPER</text>
+  <text x="94" y="420" font-family="monospace,Courier" font-size="26" fill="#a1a1aa">PHP · MySQL · JavaScript</text>
+</svg>
