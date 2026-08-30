@@ -1421,6 +1421,44 @@ section { position: relative; padding: 100px 0; }
 
 .pad { padding: 60px 0; }
 
+/* ---------- HOVER POLISH ---------- */
+.inline-link { transition: color 0.2s, border-bottom-color 0.2s; }
+
+.nav-logo { transition: transform 0.2s; }
+.nav-logo:hover { transform: translateY(-1px); }
+.nav-logo .logo-text { transition: color 0.2s; }
+.nav-logo:hover .logo-text { color: var(--accent); }
+
+.nav-link { transition: color 0.2s, background 0.2s, transform 0.2s; }
+.nav-link:hover { transform: translateY(-1px); }
+
+.mobile-link {
+  transition: color 0.2s, background 0.2s, transform 0.2s;
+}
+.mobile-link:hover { color: var(--accent); background: rgba(43,217,139,0.06); transform: translateX(4px); }
+.mobile-link:hover .mobile-link-arrow { color: var(--accent); }
+.mobile-menu-social a { transition: color 0.2s; }
+
+.view-switch { transition: color 0.2s, background 0.2s, transform 0.2s; }
+.view-switch:hover { color: var(--text); transform: translateY(-1px); }
+
+.filter-chip { transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s; }
+.filter-chip:hover { transform: translateY(-1px); background: var(--accent-soft); }
+
+.clink .clink-arrow { transition: color 0.2s, transform 0.2s; }
+.clink small { transition: color 0.2s; }
+.clink:hover .clink-arrow { color: var(--accent); transform: translateX(2px); }
+.clink:hover small { color: var(--accent); }
+
+.lab-link svg,
+.btn svg,
+.pl-arrow { transition: transform 0.2s; }
+.lab-link:hover svg,
+.btn-primary:hover svg,
+.btn-ghost:hover svg,
+.project-list-row:hover .pl-arrow { transform: translate(2px, -2px); }
+.project-list-row:hover .pl-arrow { color: var(--accent); }
+
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 1024px) {
   .expertise-grid { grid-template-columns: 1fr; }
