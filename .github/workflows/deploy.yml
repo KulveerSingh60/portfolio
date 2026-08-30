@@ -32,6 +32,11 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          # Optional: set a repository Actions variable VITE_AI_API_URL to the
+          # deployed Cloudflare Worker URL so the production chat calls it.
+          # If unset, the chat shows a friendly "not configured" state.
+          VITE_AI_API_URL: ${{ vars.VITE_AI_API_URL }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

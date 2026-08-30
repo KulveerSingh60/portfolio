@@ -4,6 +4,7 @@ import Loader from './components/Loader'
 import Cursor from './components/Cursor'
 import SectionBoundary from './components/SectionBoundary'
 import Navbar from './components/Navbar'
+import ChatSection from './components/ChatSection'
 import { initSound } from './lib/sound'
 import Hero from './sections/Hero'
 import About from './sections/About'
@@ -39,6 +40,7 @@ export default function App() {
         <Navbar />
         <main>
           <SectionBoundary><Hero /></SectionBoundary>
+          <ChatSection />
           <SectionBoundary fallback={null}><About /></SectionBoundary>
           <SectionBoundary fallback={null}><Expertise /></SectionBoundary>
           <SectionBoundary fallback={<div className="container pad" />}><Projects /></SectionBoundary>

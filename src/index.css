@@ -1301,7 +1301,11 @@ section { position: relative; padding: 100px 0; }
   padding: 20px 0 0;
 }
 
-/* ---------- KULVEER.SYS ---------- */
+/* ---------- KULVEER.AI ---------- */
+@keyframes kt-blink {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
 .kt {
   margin-top: 40px;
   background: var(--card);
@@ -1330,6 +1334,162 @@ section { position: relative; padding: 100px 0; }
   width: 8px; height: 8px; border-radius: 50%;
   background: var(--accent);
 }
+.kt-screen {
+  padding: 16px 20px 4px;
+  min-width: 0;
+  max-height: 380px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.kt-empty { padding: 6px 2px 14px; }
+.kt-empty-title { font-size: 11px; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 8px; }
+.kt-empty p { color: var(--muted); font-size: 14px; line-height: 1.6; max-width: 520px; }
+.kt-banner {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+  background: var(--accent-soft);
+}
+.kt-suggestions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.kt-suggestion {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--border-soft);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  padding: 8px 12px;
+  border-radius: 999px;
+  text-align: left;
+  transition: color 0.2s, border-color 0.2s, transform 0.2s;
+}
+.kt-suggestion:hover:not(:disabled) { color: var(--text); border-color: var(--border); transform: translateY(-1px); }
+.kt-suggestion:disabled { opacity: 0.5; cursor: not-allowed; }
+.kt-suggestion .kt-arrow { transition: transform 0.2s, color 0.2s; }
+.kt-suggestion:hover .kt-arrow { transform: translate(2px, -2px); color: var(--accent); }
+.kt-messages { display: flex; flex-direction: column; gap: 12px; padding: 2px 0 12px; min-width: 0; }
+.kt-msg {
+  align-self: flex-start;
+  min-width: 0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  max-width: 88%;
+  font-size: 14.5px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.kt-msg.user {
+  align-self: flex-end;
+  background: var(--accent);
+  color: #04120b;
+  border-radius: 12px 12px 2px 12px;
+}
+.kt-msg.ai {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--card-2);
+  border: 1px solid var(--border-soft);
+  color: var(--text);
+  border-radius: 2px 12px 12px 12px;
+}
+.kt-msg-tag { font-size: 10px; letter-spacing: 0.12em; color: var(--accent); }
+.kt-msg-text { min-width: 0; white-space: pre-wrap; }
+.kt-typing {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted-2);
+  font-size: 13px;
+}
+.kt-typing-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  animation: kt-blink 1s infinite;
+}
+.kt-error {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+  background: var(--card-2);
+}
+.kt-error-links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; }
+.kt-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--accent);
+}
+.kt-link .kt-arrow { transition: transform 0.2s, color 0.2s; }
+.kt-link:hover .kt-arrow { transform: translate(2px, -2px); }
+.kt-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px 14px;
+  border-top: 1px solid var(--border-soft);
+}
+.kt-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+  background: var(--card-2);
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  padding: 0 16px;
+}
+.kt-input-wrap:focus-within { border-color: var(--accent); }
+.kt-prompt-caret { color: var(--accent); font-size: 13px; line-height: 1; }
+.kt-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  padding: 12px 0;
+  outline: none;
+}
+.kt-input::placeholder { color: var(--muted-2); }
+.kt-send {
+  flex: none;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #04120b;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+.kt-send:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 24px -12px var(--accent-glow); }
+.kt-send:disabled { opacity: 0.4; cursor: not-allowed; }
+.kt-count { padding: 0 20px 16px; color: var(--muted-2); font-size: 11px; }
+
+/* Compact chat section directly below the Hero */
+.ai-section {
+  padding: 16px 0 32px;
+}
+.ai-section .kt {
+  margin-top: 0;
+}
+
+/* ---------- KULVEER.SYS ---------- */
 .kt-commands {
   display: flex;
   flex-wrap: wrap;
@@ -1355,7 +1515,7 @@ section { position: relative; padding: 100px 0; }
   color: var(--muted-2);
   letter-spacing: 0.02em;
 }
-.kt-prompt-caret { color: var(--accent); margin-right: 8px; }
+.kt-prompt .kt-prompt-caret { color: var(--accent); margin-right: 8px; }
 .kt-body {
   padding: 14px 20px 22px;
   min-width: 0;
@@ -1390,16 +1550,6 @@ section { position: relative; padding: 100px 0; }
   gap: 6px;
   min-width: 0;
 }
-.kt-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  color: var(--accent);
-  min-width: 0;
-}
-.kt-link .kt-arrow { transition: transform 0.2s, color 0.2s; flex: none; }
-.kt-link:hover .kt-arrow { transform: translate(2px, -2px); }
 .kt-proj { flex-direction: column; align-items: flex-start; gap: 8px; }
 .kt-proj-title { color: var(--text); font-weight: 600; font-size: 15px; }
 .kt-exp-dur {
@@ -1735,6 +1885,11 @@ section { position: relative; padding: 100px 0; }
   .modal-body { padding: 22px 20px 16px; }
   .modal-footer { padding: 16px 20px 22px; }
   .hero-inner { min-height: auto; }
+  .kt-screen { padding: 14px 14px 4px; }
+  .kt-form { padding: 10px 14px 12px; }
+  .kt-count { padding: 0 14px 14px; }
+  .kt-msg { max-width: 100%; }
+  .kt-error-links { gap: 10px; }
   .kt-head, .kt-commands, .kt-prompt { padding-left: 14px; padding-right: 14px; }
   .kt-body { padding: 14px 14px 20px; }
   .kt-row { flex-direction: column; align-items: flex-start; gap: 6px; }
