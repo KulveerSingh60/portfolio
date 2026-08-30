@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { STATS, PROFILE, CERTIFICATIONS } from '../data'
 import SectionHead from '../components/SectionHead'
+import AboutTabs from '../components/AboutTabs'
 
 export default function About() {
   return (
@@ -21,17 +22,7 @@ export default function About() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="about-lead">{PROFILE.about}</p>
-            <p className="about-body">
-              As a Computer Applications student and developer, I combine a strong technical
-              foundation with real, hands-on internship experience — shipping production-style
-              applications, applying digital marketing to live campaigns, and keeping a disciplined
-              workflow across the full development lifecycle.
-            </p>
-            <p className="about-body">
-              I'm currently focused on deepening my full-stack skills and building interactive,
-              well-crafted web products that look as good as they work.
-            </p>
+            <AboutTabs />
             <div className="about-facts">
               <div>
                 <span className="mono fact-k">Location</span>
