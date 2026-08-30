@@ -20,7 +20,7 @@ export const PROFILE = {
   role: 'Full-Stack Developer',
   statement: 'I build modern web applications and interactive digital experiences.',
   subLine: 'Building modern web applications with PHP, MySQL and JavaScript.',
-  location: 'Gidderbaha, Punjab, India',
+  location: 'Punjab, India',
   logo: 'KULVEER.SINGH',
   tagline:
     'Computer Applications graduate & full-stack developer. I design and ship real-world web apps with PHP, MySQL and JavaScript — clean, responsive, built to perform.',

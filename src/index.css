@@ -70,7 +70,7 @@ button { font-family: inherit; cursor: pointer; }
   padding: 0 28px;
 }
 
-section { position: relative; padding: 110px 0; }
+section { position: relative; padding: 100px 0; }
 
 .mono { font-family: var(--mono); }
 .accent { color: var(--accent); }
@@ -604,7 +604,7 @@ section { position: relative; padding: 110px 0; }
 .stat-value .accent { color: var(--accent); }
 .stat-label { text-align: right; }
 .stat-label b { display: block; font-size: 16px; letter-spacing: -0.01em; }
-.stat-label small { font-size: 12.5px; color: var(--muted-2); }
+.stat-label small { font-size: 15px; color: var(--muted-2); }
 
 .about-certs { margin-top: 78px; }
 .about-certs-head {
@@ -1185,7 +1185,7 @@ section { position: relative; padding: 110px 0; }
 .lab-dot.live { background: var(--accent); }
 .lab-dot.soon { background: var(--muted-2); }
 .lab-title { font-size: 24px; margin-bottom: 10px; }
-.lab-desc { color: var(--muted); font-size: 14px; line-height: 1.6; }
+.lab-desc { color: var(--muted); font-size: 15px; line-height: 1.65; }
 .lab-link {
   display: inline-flex;
   align-items: center;
