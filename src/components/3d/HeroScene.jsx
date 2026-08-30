@@ -143,6 +143,7 @@ export default function HeroScene() {
 
       <Suspense fallback={<Html center>Loading 3D…</Html>}>
         <Rig>
+          <group scale={mobile ? 1 : 1.06}>
           <Float speed={1.2} rotationIntensity={0.12} floatIntensity={0.5}>
             <group position={[0, 0.1, 0]}>
               <Monitor position={[0.95, 0.1, 0]} />
@@ -155,6 +156,7 @@ export default function HeroScene() {
           <FloatShape position={[1.8, -0.6, -0.8]} size={0.06} color="#2bd98b" speed={1.9} />
 
           <Sparkles count={mobile ? 12 : 26} scale={[5, 3, 3]} size={1.6} speed={0.4} opacity={0.35} color="#2bd98b" />
+          </group>
         </Rig>
 
         <ContactShadows position={[0, -0.68, 0]} opacity={0.45} scale={7} blur={2.6} far={2.6} />
