@@ -234,6 +234,8 @@ section { position: relative; padding: 100px 0; }
   border-radius: 999px;
   transition: border-color 0.2s, background 0.2s;
 }
+.nav-resume svg { transition: transform 0.2s; }
+.nav-resume:hover svg { transform: translate(2px, -1px); }
 .nav-resume:hover { border-color: var(--accent); background: var(--accent-soft); }
 .nav-sound {
   background: none;
@@ -243,9 +245,9 @@ section { position: relative; padding: 100px 0; }
   letter-spacing: 0.08em;
   padding: 6px 10px;
   border-radius: 999px;
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
 }
-.nav-sound:hover { color: var(--text); border-color: var(--accent); }
+.nav-sound:hover { color: var(--text); border-color: var(--accent); transform: translateY(-1px); }
 .nav-sound[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
 .nav-toggle { display: none; background: none; border: none; color: var(--text); }
 
@@ -270,7 +272,7 @@ section { position: relative; padding: 100px 0; }
 }
 .mobile-link .num { color: var(--muted-2); font-size: 12px; }
 .mobile-link-label { font-size: 26px; font-weight: 600; letter-spacing: -0.02em; flex: 1; text-align: left; }
-.mobile-link-arrow { color: var(--muted-2); }
+.mobile-link-arrow { color: var(--muted-2); transition: color 0.2s, transform 0.2s; }
 .mobile-menu-social { margin-top: auto; display: flex; gap: 24px; }
 .mobile-menu-social a { font-family: var(--mono); font-size: 13px; color: var(--muted); }
 .mobile-menu-social a:hover { color: var(--accent); }
@@ -604,9 +606,9 @@ section { position: relative; padding: 100px 0; }
   letter-spacing: 0.08em;
   padding: 8px 14px;
   border-radius: 999px;
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
 }
-.about-tab:hover { color: var(--text); border-color: var(--border); }
+.about-tab:hover { color: var(--text); border-color: var(--border); transform: translateY(-1px); }
 .about-tab.active {
   color: #04120b;
   background: var(--accent);
@@ -1328,6 +1330,7 @@ section { position: relative; padding: 100px 0; }
   transition: border-color 0.25s, transform 0.25s;
 }
 .gh-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+.gh-card:hover .gh-top svg { color: var(--accent); transform: translate(2px, -2px); }
 .gh-top {
   display: flex;
   justify-content: space-between;
@@ -1335,6 +1338,7 @@ section { position: relative; padding: 100px 0; }
   color: var(--muted);
   margin-bottom: 16px;
 }
+.gh-top svg { transition: color 0.25s, transform 0.25s; }
 .gh-name { font-size: 16px; color: var(--text); margin-bottom: 8px; word-break: break-word; line-height: 1.4; }
 .gh-desc {
   color: var(--muted);
@@ -1464,7 +1468,9 @@ section { position: relative; padding: 100px 0; }
   justify-content: center;
   color: var(--accent);
   flex: none;
+  transition: border-color 0.2s, background 0.2s;
 }
+.clink:hover .clink-ic { border-color: var(--accent); background: var(--accent-soft); }
 .clink-text { display: flex; flex-direction: column; gap: 2px; }
 .clink-text strong { font-size: 16.5px; }
 .clink-text small { color: var(--muted-2); font-size: 12.5px; }
@@ -1500,7 +1506,9 @@ section { position: relative; padding: 100px 0; }
   gap: 5px;
   color: var(--muted-2);
   margin-left: 8px;
+  transition: color 0.2s, transform 0.2s;
 }
+.footer-meta:hover .footer-top { color: var(--accent); transform: translateY(-2px); }
 .footer-social { display: flex; gap: 16px; }
 .footer-social a { color: var(--muted); transition: color 0.2s; }
 .footer-social a:hover { color: var(--accent); }
@@ -1532,7 +1540,7 @@ section { position: relative; padding: 100px 0; }
   transition: color 0.2s, background 0.2s, transform 0.2s;
 }
 .mobile-link:hover { color: var(--accent); background: rgba(43,217,139,0.06); transform: translateX(4px); }
-.mobile-link:hover .mobile-link-arrow { color: var(--accent); }
+.mobile-link:hover .mobile-link-arrow { color: var(--accent); transform: translateX(3px); }
 .mobile-menu-social a { transition: color 0.2s; }
 
 .view-switch { transition: color 0.2s, background 0.2s, transform 0.2s; }
