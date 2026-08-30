@@ -7,6 +7,11 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
+    modulePreload: {
+      resolveDependencies(filename, deps) {
+        return deps.filter((d) => !d.includes('/three-'))
+      }
+    },
     chunkSizeWarningLimit: 1200,
     rollupOptions: {
       output: {
