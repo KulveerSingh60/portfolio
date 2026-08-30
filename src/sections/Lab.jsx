@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { FlaskConical, ArrowUpRight, Lock } from 'lucide-react'
 import SectionHead from '../components/SectionHead'
+import KulveerTerminal from '../components/KulveerTerminal'
 import { LAB_ITEMS } from '../data'
 
 export default function Lab() {
@@ -54,6 +55,8 @@ export default function Lab() {
             <span className="mono">+ New experiments are added as I explore — follow my GitHub to see them live.</span>
           </motion.div>
         </div>
+
+        <KulveerTerminal />
       </div>
     </section>
   )
