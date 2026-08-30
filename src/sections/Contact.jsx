@@ -8,15 +8,14 @@ const HEAD = ['LET\'S', 'BUILD', 'SOMETHING.']
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
-  const [state, handleSubmit] = useForm('xnpqnrkn')
-  const [resetKey, setResetKey] = useState(0)
+  const [state, handleSubmit, resetForm] = useForm('xnpqnrkn')
   const sent = state.succeeded
 
   const update = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
   const reset = () => {
+    resetForm()
     setForm({ name: '', email: '', subject: '', message: '' })
-    setResetKey((k) => k + 1)
   }
 
   return (
@@ -45,7 +44,7 @@ export default function Contact() {
                 <button className="btn btn-ghost sm" onClick={reset}>Send another</button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="contact-form" key={resetKey}>
+              <form onSubmit={handleSubmit} className="contact-form">
                 <div className="field">
                   <label htmlFor="name">Name</label>
                   <input id="name" name="name" value={form.name} onChange={update} required placeholder="Your name" />
