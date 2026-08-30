@@ -30,12 +30,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Verify VITE_AI_API_URL is present
+        run: |
+          if [ -n "$VITE_AI_API_URL" ]; then
+            echo "VITE_AI_API_URL is set (length ${#VITE_AI_API_URL}, not printed)"
+            echo "VITE_AI_API_URL_LENGTH=${#VITE_AI_API_URL}" >> "$GITHUB_ENV"
+          else
+            echo "::error::VITE_AI_API_URL is not set. Set a repository variable named VITE_AI_API_URL (GitHub > Settings > Secrets and variables > Actions > Variables) to the deployed Cloudflare Worker URL."
+            exit 1
+          fi
+        env:
+          # Public endpoint (not a secret) used only to configure the build.
+          VITE_AI_API_URL: ${{ vars.VITE_AI_API_URL }}
+
       - name: Build
         run: npm run build
         env:
-          # Optional: set a repository Actions variable VITE_AI_API_URL to the
-          # deployed Cloudflare Worker URL so the production chat calls it.
-          # If unset, the chat shows a friendly "not configured" state.
+          # Public endpoint (not a secret) used only to configure the build.
           VITE_AI_API_URL: ${{ vars.VITE_AI_API_URL }}
 
       - name: Setup Pages
