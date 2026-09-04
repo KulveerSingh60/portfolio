@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Github, ArrowUpRight } from 'lucide-react'
 import { LINKS, SOCIALS } from '../data'
 import SoundToggle from './SoundToggle'
+import { scrollTo, stopSmoothScroll, startSmoothScroll } from '../lib/motion'
 
 const NAV_LINKS = [
   { id: 'home', label: 'Home', num: '01' },
@@ -43,13 +44,17 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
-    return () => (document.body.style.overflow = '')
+    if (open) stopSmoothScroll()
+    else startSmoothScroll()
+    return () => {
+      document.body.style.overflow = ''
+      startSmoothScroll()
+    }
   }, [open])
 
   const go = (id) => {
     setOpen(false)
-    const el = document.getElementById(id)
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
+    scrollTo(`#${id}`)
   }
 
   return (

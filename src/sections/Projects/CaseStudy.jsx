@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { X, Github, ExternalLink, ArrowUpRight } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import ProjectDevice from '../../components/3d/ProjectDevice'
+import { stopSmoothScroll, startSmoothScroll } from '../../lib/motion'
 
 const FOCUSABLE = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
 
@@ -43,12 +44,14 @@ export default function CaseStudy({ project, onClose }) {
     }
 
     document.body.style.overflow = 'hidden'
+    stopSmoothScroll()
     window.addEventListener('keydown', onKey)
 
     if (closeRef.current) closeRef.current.focus()
 
     return () => {
       document.body.style.overflow = ''
+      startSmoothScroll()
       window.removeEventListener('keydown', onKey)
       if (prevFocus && prevFocus.focus && prevFocus.focus instanceof Function) prevFocus.focus()
     }

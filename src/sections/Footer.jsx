@@ -1,10 +1,11 @@
 import { Github, Linkedin, Mail, Heart, ArrowUp } from 'lucide-react'
 import { LINKS, SOCIALS } from '../data'
+import { scrollTo } from '../lib/motion'
 
 const year = new Date().getFullYear()
 
 export default function Footer() {
-  const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
+  const scrollTop = () => scrollTo('#home')
 
   return (
     <footer className="footer">

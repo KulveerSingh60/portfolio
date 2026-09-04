@@ -4,8 +4,10 @@ import { ArrowDown, ArrowUpRight, Github, Linkedin, Mail } from 'lucide-react'
 import SectionBoundary from '../components/SectionBoundary'
 import Marquee from '../components/Marquee'
 import HeroFallback from '../components/3d/HeroFallback'
+import Magnet from '../components/reactbits/Magnet'
 import { PROFILE, SOCIALS } from '../data'
 import { useIsMobile } from '../hooks/useMedia'
+import { gsap } from '../lib/motion'
 
 const HeroScene = lazy(() => import('../components/3d/HeroScene'))
 
@@ -19,6 +21,29 @@ export default function Hero() {
   useEffect(() => {
     const t = setTimeout(() => setPlay(true), 60)
     return () => clearTimeout(t)
+  }, [])
+
+  useEffect(() => {
+    const mm = gsap.matchMedia()
+    mm.add('(prefers-reduced-motion: no-preference) and (min-width: 768px)', () => {
+      const hero3d = document.querySelector('.hero-3d')
+      const copy = document.querySelector('.hero-copy')
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      })
+      if (hero3d) {
+        tl.to(hero3d, { yPercent: 18, opacity: 0.15, ease: 'none' }, 0)
+      }
+      if (copy) {
+        tl.to(copy, { yPercent: -12, opacity: 0.5, ease: 'none' }, 0)
+      }
+    })
+    return () => mm.revert()
   }, [])
 
   return (
@@ -85,17 +110,21 @@ export default function Hero() {
             animate={play ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.75 }}
           >
-            <a className="btn btn-primary" href="#work">
-              Explore Work <ArrowDown size={18} />
-            </a>
-            <a
-              className="btn btn-ghost"
-              href={SOCIALS[1].url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View LinkedIn <ArrowUpRight size={18} />
-            </a>
+            <Magnet>
+              <a className="btn btn-primary" href="#work">
+                Explore Work <ArrowDown size={18} />
+              </a>
+            </Magnet>
+            <Magnet>
+              <a
+                className="btn btn-ghost"
+                href={SOCIALS[1].url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View LinkedIn <ArrowUpRight size={18} />
+              </a>
+            </Magnet>
           </motion.div>
 
           <motion.div

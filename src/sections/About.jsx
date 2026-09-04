@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { STATS, PROFILE, CERTIFICATIONS } from '../data'
 import SectionHead from '../components/SectionHead'
 import AboutTabs from '../components/AboutTabs'
+import CountUp from '../components/reactbits/CountUp'
 
 export default function About() {
   return (
@@ -10,8 +11,9 @@ export default function About() {
         <SectionHead
           chapter="01"
           eyebrow="About"
-          title="I build thoughtful digital experiences with code, design &amp; technology."
+          title={"I build thoughtful digital experiences with code, design & technology."}
           sub=""
+          blur
         />
 
         <div className="about-grid">
@@ -50,7 +52,7 @@ export default function About() {
                 transition={{ duration: 0.6, delay: i * 0.08 }}
               >
                 <span className="stat-value mono">
-                  {s.value}
+                  <CountUp to={s.value} />
                   <span className="accent">{s.suffix}</span>
                 </span>
                 <span className="stat-label">

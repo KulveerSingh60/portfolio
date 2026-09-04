@@ -1,7 +1,8 @@
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import SectionHead from '../components/SectionHead'
 import { EXPERIENCE } from '../data'
-
+import { gsap } from '../lib/motion'
 const WORK = EXPERIENCE.filter((e) => e.type === 'work')
 const EDU = EXPERIENCE.filter((e) => e.type === 'education')
 
@@ -11,6 +12,27 @@ const fadeUp = {
 }
 
 function TimelineGroup({ label, items, accent }) {
+  const progressRef = useRef(null)
+
+  useEffect(() => {
+    const progress = progressRef.current
+    if (!progress) return
+    const mm = gsap.matchMedia()
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      gsap.fromTo(
+        progress,
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: 'none',
+          transformOrigin: 'top center',
+          scrollTrigger: { trigger: progress, start: 'top 75%', end: 'bottom 55%', scrub: 0.4 },
+        }
+      )
+    })
+    return () => mm.revert()
+  }, [])
+
   return (
     <div className="tl-group">
       <div className="tl-group-head">
@@ -19,6 +41,7 @@ function TimelineGroup({ label, items, accent }) {
       </div>
 
       <div className="timeline">
+        <span ref={progressRef} className="timeline-progress" aria-hidden="true" />
         {items.map((item, i) => (
           <motion.div
             key={item.role}

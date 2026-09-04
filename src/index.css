@@ -1307,6 +1307,17 @@ section { position: relative; padding: 100px 0; }
   background: linear-gradient(180deg, var(--border), var(--border-soft));
   transform: translateX(-50%);
 }
+.timeline-progress {
+  position: absolute;
+  left: calc(100% / 3);
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent), rgba(43, 217, 139, 0.35));
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top center;
+  z-index: 1;
+  pointer-events: none;
+}
 .timeline-row {
   position: relative;
   display: grid;
@@ -1997,6 +2008,7 @@ section { position: relative; padding: 100px 0; }
   .tl-group { margin-bottom: 70px; }
   .timeline-row { grid-template-columns: 1fr; column-gap: 0; padding: 8px 0 28px; }
   .timeline::before { left: 7px; }
+  .timeline-progress { left: 7px; }
   .timeline-node { left: 7px; top: 34px; }
   .timeline-date {
     flex-direction: row;
@@ -2062,3 +2074,37 @@ section { position: relative; padding: 100px 0; }
   .marquee-track { animation: none; }
   .cursor-dot, .cursor-ring { display: none; }
 }
+
+/* ---------- RESERVED -- REACT BITS CUSTOM EFFECTS ---------- */
+/* Magnetic wrapper */
+.rb-magnet { display: inline-flex; }
+
+/* 3D Tilted Card + glare */
+.rb-tilt {
+  position: relative;
+  transform-style: preserve-3d;
+  --glare-x: 50;
+  --glare-y: 50;
+}
+.rb-tilt.has-glare { overflow: hidden; }
+/* grid/layout fit for wrapped cards */
+.lab-tilt { height: 100%; }
+.expertise-tilt { width: 100%; }
+.rb-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at calc(var(--glare-x) * 1%) calc(var(--glare-y) * 1%),
+    rgba(255, 255, 255, 0.14) 0%,
+    transparent 42%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.rb-tilt.has-glare:hover .rb-glare { opacity: 1; }
+
+/* BlurText */
+.rb-blurtext { display: inline-block; }

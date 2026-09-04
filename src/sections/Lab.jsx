@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { FlaskConical, ArrowUpRight, Lock } from 'lucide-react'
 import SectionHead from '../components/SectionHead'
 import KulveerTerminal from '../components/KulveerTerminal'
+import TiltedCard from '../components/reactbits/TiltedCard'
 import { LAB_ITEMS } from '../data'
 
 export default function Lab() {
@@ -17,14 +18,14 @@ export default function Lab() {
 
         <div className="lab-grid">
           {LAB_ITEMS.map((item, i) => (
-            <motion.div
-              key={item.number}
-              className={`lab-card ${item.status === 'soon' ? 'soon' : ''}`}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: i * 0.08 }}
-            >
+            <TiltedCard key={item.number} maxTilt={8} className="lab-tilt">
+              <motion.div
+                className={`lab-card ${item.status === 'soon' ? 'soon' : ''}`}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, delay: i * 0.08 }}
+              >
               <div className="lab-card-top">
                 <span className="lab-num mono">{item.number}</span>
                 <span className="lab-icon">
@@ -43,6 +44,7 @@ export default function Lab() {
                 </span>
               )}
             </motion.div>
+            </TiltedCard>
           ))}
 
           <motion.div

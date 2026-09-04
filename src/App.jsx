@@ -5,6 +5,7 @@ import Cursor from './components/Cursor'
 import SectionBoundary from './components/SectionBoundary'
 import Navbar from './components/Navbar'
 import ChatSection from './components/ChatSection'
+import useSmoothScroll from './hooks/useSmoothScroll'
 import { initSound } from './lib/sound'
 import Hero from './sections/Hero'
 import About from './sections/About'
@@ -22,6 +23,8 @@ export default function App() {
   useEffect(() => {
     initSound()
   }, [])
+
+  useSmoothScroll(!loading)
 
   return (
     <>

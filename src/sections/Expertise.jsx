@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import SectionBoundary from '../components/SectionBoundary'
 import SectionHead from '../components/SectionHead'
+import TiltedCard from '../components/reactbits/TiltedCard'
 import { EXPERTISE, PROCESS } from '../data'
 
 const TechCore = lazy(() => import('../components/3d/TechCore'))
@@ -20,25 +21,26 @@ export default function Expertise() {
         <div className="expertise-grid">
           <div className="expertise-list">
             {EXPERTISE.map((cat, i) => (
-              <motion.div
-                key={cat.id}
-                className={`expertise-item${cat.secondary ? ' secondary' : ''}`}
-                initial={{ opacity: 0, y: 22 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, delay: i * 0.06 }}
-              >
-                <span className="expertise-num mono">{String(i + 1).padStart(2, '0')}</span>
-                <div className="expertise-body">
-                  <h3 className="expertise-title">{cat.title}</h3>
-                  <p className="expertise-desc">{cat.desc}</p>
-                  <div className="expertise-tags">
-                    {cat.skills.map((s) => (
-                      <span key={s} className="tech-chip mono">{s}</span>
-                    ))}
+              <TiltedCard key={cat.id} maxTilt={4} glare={false} className="expertise-tilt">
+                <motion.div
+                  className={`expertise-item${cat.secondary ? ' secondary' : ''}`}
+                  initial={{ opacity: 0, y: 22 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.6, delay: i * 0.06 }}
+                >
+                  <span className="expertise-num mono">{String(i + 1).padStart(2, '0')}</span>
+                  <div className="expertise-body">
+                    <h3 className="expertise-title">{cat.title}</h3>
+                    <p className="expertise-desc">{cat.desc}</p>
+                    <div className="expertise-tags">
+                      {cat.skills.map((s) => (
+                        <span key={s} className="tech-chip mono">{s}</span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </TiltedCard>
             ))}
           </div>
 

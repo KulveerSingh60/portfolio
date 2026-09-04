@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
+import BlurText from './reactbits/BlurText'
 
-export default function SectionHead({ chapter, eyebrow, title, sub, align = 'left' }) {
+export default function SectionHead({ chapter, eyebrow, title, sub, align = 'left', blur = false }) {
   return (
     <motion.div
       className={`section-head ${align === 'center' ? 'center' : 'left'}`}
@@ -13,7 +14,11 @@ export default function SectionHead({ chapter, eyebrow, title, sub, align = 'lef
         {chapter && <span className="chapter mono">{chapter}</span>}
         {eyebrow && <span className="eyebrow mono">{eyebrow}</span>}
       </div>
-      <h2 className="section-title" dangerouslySetInnerHTML={{ __html: title }} />
+      {blur ? (
+        <BlurText as="h2" className="section-title">{title}</BlurText>
+      ) : (
+        <h2 className="section-title" dangerouslySetInnerHTML={{ __html: title }} />
+      )}
       {sub && <p className="section-sub">{sub}</p>}
     </motion.div>
   )
