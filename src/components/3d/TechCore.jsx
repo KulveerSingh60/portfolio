@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Html, Float } from '@react-three/drei'
 import { useRef } from 'react'
@@ -9,11 +9,11 @@ const TECHS = [
   'Bootstrap', 'AJAX', 'WordPress', 'Git', 'SEO',
 ]
 
-function Core() {
+function Core({ motionScale = 1 }) {
   const ref = useRef()
   useFrame(({ clock }) => {
     if (!ref.current) return
-    ref.current.rotation.y = clock.getElapsedTime() * 0.35
+    ref.current.rotation.y = clock.getElapsedTime() * 0.35 * motionScale
   })
   return (
     <group ref={ref}>
@@ -29,13 +29,13 @@ function Core() {
   )
 }
 
-function Orbiting() {
+function Orbiting({ motionScale = 1 }) {
   const group = useRef()
   useFrame(({ clock }) => {
     if (!group.current) return
     const t = clock.getElapsedTime()
     group.current.children.forEach((child, i) => {
-      const speed = 0.5 + (i % 3) * 0.2
+      const speed = (0.5 + (i % 3) * 0.2) * motionScale
       const angle = t * speed + (i / TECHS.length) * Math.PI * 2
       child.position.x = Math.cos(angle) * 2.1
       child.position.y = Math.sin(angle * 1.4) * 0.9
@@ -58,6 +58,19 @@ function Orbiting() {
 export default function TechCore() {
   const webgl = useWebGL()
   const mobile = useIsMobile()
+  const [reduced, setReduced] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const update = () => setReduced(mq.matches)
+    update()
+    if (mq.addEventListener) mq.addEventListener('change', update)
+    else if (mq.addListener) mq.addListener(update)
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', update)
+      else if (mq.removeListener) mq.removeListener(update)
+    }
+  }, [])
 
   if (!webgl) {
     return (
@@ -66,6 +79,8 @@ export default function TechCore() {
       </div>
     )
   }
+
+  const motionScale = reduced ? 0 : 1
 
   return (
     <Canvas
@@ -78,10 +93,10 @@ export default function TechCore() {
       <directionalLight position={[3, 3, 3]} intensity={1} />
       <pointLight position={[0, 0, 2]} intensity={0.5} color="#2bd98b" />
       <Suspense fallback={null}>
-        <Float speed={1.2} rotationIntensity={0.3} floatIntensity={0.6}>
-          <Core />
+        <Float speed={reduced ? 0 : 1.2} rotationIntensity={reduced ? 0 : 0.3} floatIntensity={reduced ? 0 : 0.6}>
+          <Core motionScale={motionScale} />
         </Float>
-        <Orbiting />
+        <Orbiting motionScale={motionScale} />
       </Suspense>
     </Canvas>
   )

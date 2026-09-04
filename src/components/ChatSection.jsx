@@ -27,7 +27,7 @@ export default function ChatSection() {
   }, [])
 
   return (
-    <section className="section ai-section" aria-label="Ask KULVEER.AI">
+    <section className="section ai-section" aria-label="Ask KULVEER.AI" data-bg-theme="ai">
       <div className="container">
         <div ref={ref}>
           <AiAssistant />

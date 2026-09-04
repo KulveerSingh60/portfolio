@@ -6,7 +6,7 @@ import CountUp from '../components/reactbits/CountUp'
 
 export default function About() {
   return (
-    <section id="about" className="section about">
+    <section id="about" className="section about" data-bg-theme="about">
       <div className="container">
         <SectionHead
           chapter="01"

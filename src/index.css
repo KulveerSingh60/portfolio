@@ -2108,3 +2108,34 @@ section { position: relative; padding: 100px 0; }
 
 /* BlurText */
 .rb-blurtext { display: inline-block; }
+
+/* ---------- REACTIVE 3D BACKGROUND ---------- */
+.app { position: relative; z-index: 1; }
+
+/* Global fixed full-viewport environment behind all content */
+.reactive-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.reactive-bg canvas { pointer-events: none; }
+
+/* Static fallback used when WebGL unsupported or prefers-reduced-motion  */
+.bg-static {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 800px at 20% 10%, rgba(43, 217, 139, 0.06), transparent 55%),
+    radial-gradient(1000px 700px at 90% 30%, rgba(34, 211, 238, 0.05), transparent 55%);
+}
+
+/* Keep hero/expertise 3D visuals above the atmosphere */
+.hero-3d,
+.expertise-visual {
+  position: relative;
+  z-index: 1;
+}

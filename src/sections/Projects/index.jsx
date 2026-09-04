@@ -15,7 +15,7 @@ export default function Projects() {
   const filtered = filter === 'All' ? PROJECTS : PROJECTS.filter((p) => p.filters.includes(filter))
 
   return (
-    <section id="work" className="section work">
+    <section id="work" className="section work" data-bg-theme="work">
       <div className="container">
         <div className="work-head">
           <SectionHead

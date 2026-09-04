@@ -78,7 +78,7 @@ function TimelineGroup({ label, items, accent }) {
 
 export default function Experience() {
   return (
-    <section id="experience" className="section experience">
+    <section id="experience" className="section experience" data-bg-theme="journey">
       <div className="container">
         <SectionHead
           chapter="04"

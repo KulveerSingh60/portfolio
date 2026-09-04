@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Suspense, lazy, useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Loader from './components/Loader'
 import Cursor from './components/Cursor'
@@ -6,6 +6,7 @@ import SectionBoundary from './components/SectionBoundary'
 import Navbar from './components/Navbar'
 import ChatSection from './components/ChatSection'
 import useSmoothScroll from './hooks/useSmoothScroll'
+import useSectionTheme from './hooks/useSectionTheme'
 import { initSound } from './lib/sound'
 import Hero from './sections/Hero'
 import About from './sections/About'
@@ -17,6 +18,8 @@ import GitHub from './sections/GitHub'
 import Contact from './sections/Contact'
 import Footer from './sections/Footer'
 
+const ReactiveBackground = lazy(() => import('./components/3d/ReactiveBackground'))
+
 export default function App() {
   const [loading, setLoading] = useState(true)
 
@@ -25,10 +28,15 @@ export default function App() {
   }, [])
 
   useSmoothScroll(!loading)
+  useSectionTheme()
 
   return (
     <>
       <Cursor />
+
+      <Suspense fallback={<div className="bg-static" aria-hidden="true" />}>
+        <ReactiveBackground />
+      </Suspense>
 
       <AnimatePresence>
         {loading && <Loader key="loader" onDone={() => setLoading(false)} />}

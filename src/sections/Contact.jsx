@@ -19,7 +19,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="contact">
+    <section id="contact" className="contact" data-bg-theme="contact">
       <div className="contact-glow" aria-hidden="true" />
       <div className="container">
         <div className="contact-top">

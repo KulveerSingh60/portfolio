@@ -7,7 +7,7 @@ import { LAB_ITEMS } from '../data'
 
 export default function Lab() {
   return (
-    <section id="lab" className="section lab">
+    <section id="lab" className="section lab" data-bg-theme="lab">
       <div className="container">
         <SectionHead
           chapter="05"

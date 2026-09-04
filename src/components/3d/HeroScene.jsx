@@ -1,4 +1,4 @@
-import { Suspense, useRef } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Float, ContactShadows, Html, Sparkles } from '@react-three/drei'
 import { useIsMobile, useWebGL } from '../../hooks/useMedia'
@@ -126,8 +126,24 @@ function Rig({ children }) {
 export default function HeroScene() {
   const webgl = useWebGL()
   const mobile = useIsMobile()
+  const [reduced, setReduced] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const update = () => setReduced(mq.matches)
+    update()
+    if (mq.addEventListener) mq.addEventListener('change', update)
+    else if (mq.addListener) mq.addListener(update)
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', update)
+      else if (mq.removeListener) mq.removeListener(update)
+    }
+  }, [])
 
   if (!webgl) return <HeroFallback />
+
+  // Reduced motion: keep a nearly-static, minimal scene (far fewer Sparkles).
+  const sparkles = reduced ? 3 : mobile ? 12 : 26
 
   return (
     <Canvas
@@ -144,7 +160,7 @@ export default function HeroScene() {
       <Suspense fallback={<Html center>Loading 3D…</Html>}>
         <Rig>
           <group scale={mobile ? 1 : 1.06}>
-          <Float speed={1.2} rotationIntensity={0.12} floatIntensity={0.5}>
+          <Float speed={reduced ? 0 : 1.2} rotationIntensity={reduced ? 0 : 0.12} floatIntensity={reduced ? 0 : 0.5}>
             <group position={[0, 0.1, 0]}>
               <Monitor position={[0.95, 0.1, 0]} />
               <Laptop position={[-0.95, 0.05, 0.05]} />
@@ -152,10 +168,10 @@ export default function HeroScene() {
             </group>
           </Float>
 
-          <FloatShape position={[-1.85, 0.95, -0.6]} size={0.08} color="#22d3ee" speed={1.3} />
-          <FloatShape position={[1.8, -0.6, -0.8]} size={0.06} color="#2bd98b" speed={1.9} />
+          <FloatShape position={[-1.85, 0.95, -0.6]} size={0.08} color="#22d3ee" speed={reduced ? 0 : 1.3} />
+          <FloatShape position={[1.8, -0.6, -0.8]} size={0.06} color="#2bd98b" speed={reduced ? 0 : 1.9} />
 
-          <Sparkles count={mobile ? 12 : 26} scale={[5, 3, 3]} size={1.6} speed={0.4} opacity={0.35} color="#2bd98b" />
+          <Sparkles count={sparkles} scale={[5, 3, 3]} size={1.6} speed={reduced ? 0 : 0.4} opacity={reduced ? 0.06 : 0.35} color="#2bd98b" />
           </group>
         </Rig>
 

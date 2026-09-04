@@ -47,7 +47,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id="home" className="hero">
+    <section id="home" className="hero" data-bg-theme="home">
       <div className="hero-glow" aria-hidden="true" />
       <div className="container hero-inner">
         <div className="hero-copy">

@@ -34,7 +34,7 @@ export default function GitHub() {
   }, [])
 
   return (
-    <section id="github" className="section github">
+    <section id="github" className="section github" data-bg-theme="github">
       <div className="container">
         <SectionHead
           chapter="06"

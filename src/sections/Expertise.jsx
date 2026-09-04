@@ -9,7 +9,7 @@ const TechCore = lazy(() => import('../components/3d/TechCore'))
 
 export default function Expertise() {
   return (
-    <section id="expertise" className="section expertise">
+    <section id="expertise" className="section expertise" data-bg-theme="expertise">
       <div className="container">
         <SectionHead
           chapter="02"
