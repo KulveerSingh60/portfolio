@@ -1,7 +1,10 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const TABS = ['PROFILE', 'EDUCATION', 'EXPERIENCE', 'FOCUS']
+
+const tabId = (t) => `about-tab-${t.toLowerCase()}`
+const panelId = (t) => `about-panel-${t.toLowerCase()}`
 
 const aboutCopy = (label) => (
   <>
@@ -60,17 +63,48 @@ function Panel({ tab }) {
 
 export default function AboutTabs() {
   const [tab, setTab] = useState('PROFILE')
+  const tabsRef = useRef([])
+
+  const select = (next) => {
+    setTab(next)
+    const el = tabsRef.current[TABS.indexOf(next)]
+    if (el) el.focus()
+  }
+
+  const onKeyDown = (e) => {
+    const idx = TABS.indexOf(tab)
+    let next = null
+    if (e.key === 'Home') {
+      e.preventDefault()
+      next = 0
+    } else if (e.key === 'End') {
+      e.preventDefault()
+      next = TABS.length - 1
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault()
+      next = (idx + 1) % TABS.length
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault()
+      next = (idx - 1 + TABS.length) % TABS.length
+    }
+    if (next !== null && next !== idx) select(TABS[next])
+  }
 
   return (
     <div className="about-tabs">
       <div className="about-tabs-nav" role="tablist" aria-label="About">
-        {TABS.map((t) => (
+        {TABS.map((t, i) => (
           <button
             key={t}
+            ref={(el) => (tabsRef.current[i] = el)}
             role="tab"
+            id={tabId(t)}
+            aria-controls={panelId(t)}
             aria-selected={tab === t}
+            tabIndex={tab === t ? 0 : -1}
             className={`about-tab ${tab === t ? 'active' : ''}`}
             onClick={() => setTab(t)}
+            onKeyDown={onKeyDown}
           >
             {t}
           </button>
@@ -82,6 +116,9 @@ export default function AboutTabs() {
           <motion.div
             key={tab}
             role="tabpanel"
+            id={panelId(tab)}
+            aria-labelledby={tabId(tab)}
+            tabIndex={0}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}

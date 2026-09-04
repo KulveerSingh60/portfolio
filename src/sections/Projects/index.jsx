@@ -92,9 +92,16 @@ export default function Projects() {
                         <button className="btn btn-primary sm" onClick={() => setSelected(p)}>
                           View Case Study
                         </button>
-                        <a className="btn btn-ghost sm" href={p.github} target="_blank" rel="noopener noreferrer">
-                          <ArrowUpRight size={16} /> GitHub
-                        </a>
+                        {p.demo && (
+                          <a className="btn btn-live sm" href={p.demo} target="_blank" rel="noopener noreferrer">
+                            <ArrowUpRight size={16} /> Live
+                          </a>
+                        )}
+                        {p.github && (
+                          <a className="btn btn-ghost sm" href={p.github} target="_blank" rel="noopener noreferrer">
+                            <ArrowUpRight size={16} /> GitHub
+                          </a>
+                        )}
                       </div>
                     </div>
                   </motion.article>

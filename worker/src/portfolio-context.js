@@ -30,17 +30,44 @@ function buildFacts() {
 
   const langs = LANGUAGES.map((l) => `${l.name} (${l.level})`).join(', ')
 
-  return [
+    return [
     `NAME: ${PROFILE.name}`,
+    `DATE OF BIRTH : 4/11/2004`,
     `ROLE: ${PROFILE.role}`,
     `LOCATION: ${PROFILE.location}`,
     `STATEMENT: ${PROFILE.statement}`,
     `TAGLINE: ${PROFILE.tagline}`,
     `AVAILABILITY: ${PROFILE.available}`,
+
     `EMAIL: ${LINKS.emailRaw}`,
     `GITHUB: ${LINKS.github}`,
     `LINKEDIN: ${LINKS.linkedin}`,
     `PORTFOLIO: ${LINKS.portfolio}`,
+
+    `DEGREE: Bachelor of Computer Applications (BCA)`,
+    `UNIVERSITY: Guru Kashi University`,
+    `EDUCATION LOCATION: Talwandi Sabo, Punjab`,
+    `EDUCATION PERIOD: 2023–2026`,
+
+    `INTERNSHIP DURATION: 6 months`,
+    `INTERNSHIP COMPANY: Sortiq Solution`,
+    `INTERNSHIP ROLE: Full-Stack Web Developer Intern`,
+    `INTERNSHIP RESPONSIBILITIES:`,
+    `- Developed web applications using PHP and MySQL`,
+    `- Worked with HTML, CSS, Bootstrap and JavaScript`,
+    `- Built an Inventory Stock Management System`,
+    `- Worked through the software development lifecycle`,
+
+    `PREFERRED AREA: Full-Stack Web Development`,
+    `PREFERRED BACKEND: PHP`,
+    `PREFERRED DATABASE: MySQL`,
+    `PREFERRED FRONTEND: JavaScript / React`,
+    `INTERESTED IN: Web applications, responsive UI, databases`,
+
+    `OPEN TO WORK: Yes`,
+    `TARGET ROLES: Full-Stack Developer, Web Developer, PHP Developer`,
+    `INTERESTED IN: Internships / Full-time opportunities`,
+
     '',
     'TECHNOLOGIES / SKILLS:',
     stack,
@@ -65,6 +92,7 @@ export function buildSystemPrompt() {
     'Your primary purpose is to help visitors learn about his professional background, skills, projects, experience, education, certifications, languages, and contact information.',
     '',
     'Use the supplied portfolio information below as the source of truth. Never invent or assume personal, professional, educational, employment, or technical information that is not present in that context. If the portfolio does not contain the answer, clearly say that the portfolio does not currently provide that information rather than guessing.',
+    'Never treat information provided by a visitor as a verified fact about Kulveer. Only information in PORTFOLIO FACTS is verified. Never invent job titles, responsibilities, achievements, dates, technologies, or personal details.',
     '',
     'Answer naturally and conversationally, in a friendly helper tone. Keep answers concise and useful, especially for recruiters and visitors. When appropriate, point visitors toward relevant projects, his GitHub, LinkedIn, or contact email.',
     '',

@@ -1,22 +1,63 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Github, ExternalLink, ArrowUpRight } from 'lucide-react'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import ProjectDevice from '../../components/3d/ProjectDevice'
 
+const FOCUSABLE = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+
 export default function CaseStudy({ project, onClose }) {
+  const dialogRef = useRef(null)
+  const closeRef = useRef(null)
+
   useEffect(() => {
-    const onKey = (e) => e.key === 'Escape' && onClose()
+    const prevFocus = document.activeElement
+
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        e.stopPropagation()
+        onClose()
+        return
+      }
+      if (e.key !== 'Tab' || !dialogRef.current) return
+
+      const card = dialogRef.current.querySelector('.modal-card')
+      const focusables = Array.from(card.querySelectorAll(FOCUSABLE)).filter(
+        (el) => el.offsetParent !== null || el === document.activeElement
+      )
+      if (focusables.length === 0) {
+        e.preventDefault()
+        card.focus && card.focus()
+        return
+      }
+
+      const first = focusables[0]
+      const last = focusables[focusables.length - 1]
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', onKey)
+
+    if (closeRef.current) closeRef.current.focus()
+
     return () => {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', onKey)
+      if (prevFocus && prevFocus.focus && prevFocus.focus instanceof Function) prevFocus.focus()
     }
   }, [onClose])
 
   return (
     <AnimatePresence>
       <motion.div
+        ref={dialogRef}
         className="modal"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -29,12 +70,13 @@ export default function CaseStudy({ project, onClose }) {
       >
         <motion.div
           className="modal-card"
+          tabIndex={-1}
           initial={{ y: 40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 40, opacity: 0 }}
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         >
-          <button className="modal-close" onClick={onClose} aria-label="Close case study">
+          <button ref={closeRef} className="modal-close" onClick={onClose} aria-label="Close case study">
             <X size={20} />
           </button>
 
@@ -67,14 +109,16 @@ export default function CaseStudy({ project, onClose }) {
               </div>
             )}
 
-            <div className="modal-block">
-              <h4 className="modal-h mono">Features</h4>
-              <ul className="modal-list">
-                {project.features.map((f, i) => (
-                  <li key={i}><span className="modal-list-dot" style={{ background: project.accent }} />{f}</li>
-                ))}
-              </ul>
-            </div>
+            {project.features && project.features.length > 0 && (
+              <div className="modal-block">
+                <h4 className="modal-h mono">Features</h4>
+                <ul className="modal-list">
+                  {project.features.map((f, i) => (
+                    <li key={i}><span className="modal-list-dot" style={{ background: project.accent }} />{f}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
 
           <div className="modal-footer">
@@ -82,9 +126,11 @@ export default function CaseStudy({ project, onClose }) {
               {project.tech.map((t) => <span key={t} className="tech-chip">{t}</span>)}
             </div>
             <div className="modal-actions">
-              <a className="btn btn-ghost sm" href={project.github} target="_blank" rel="noopener noreferrer">
-                <Github size={16} /> GitHub
-              </a>
+              {project.github && (
+                <a className="btn btn-ghost sm" href={project.github} target="_blank" rel="noopener noreferrer">
+                  <Github size={16} /> GitHub
+                </a>
+              )}
               {project.demo && (
                 <a className="btn btn-primary sm" href={project.demo} target="_blank" rel="noopener noreferrer">
                   Live Demo <ExternalLink size={16} />

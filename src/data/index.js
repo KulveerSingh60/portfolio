@@ -80,7 +80,7 @@ export const PROCESS = [
   { step: '05', title: 'Deploy', desc: 'Ship, monitor, and refine.' },
 ]
 
-export const PROJECT_FILTERS = ['All', 'PHP', 'MySQL', 'JavaScript', 'WordPress']
+export const PROJECT_FILTERS = ['All', 'PHP', 'MySQL']
 
 export const PROJECTS = [
   {
@@ -89,37 +89,42 @@ export const PROJECTS = [
     title: 'Inventory Stock Management System',
     tag: 'Full-Stack · Internship',
     description:
-      'Designed and built a full-stack web application to eliminate manual stock-tracking errors and provide real-time visibility into inventory. Implemented role-based authentication, optimized MySQL queries/indexing (~40% faster page loads), and integrated AJAX calls for live updates without refreshes.',
+      'Designed and built a full-stack web application in vanilla PHP and MySQL to replace manual stock tracking with a centralized inventory system. Includes secure user authentication with bcrypt, role-based access for admin and staff, product and category management, sales and purchase tracking, stock-status and low-stock views, dashboard analytics with Chart.js, and filterable reports backed by prepared SQL statements and CSRF protection.',
     problem:
-      'Manual stock tracking was error-prone, with no real-time visibility into inventory levels or staff access controls.',
+      'Manual stock tracking was error-prone and offered no centralized, role-based visibility into inventory levels.',
     solution:
-      'Built a full-stack PHP and MySQL inventory system with role-based authentication, optimized indexing, and live AJAX updates — cutting manual tracking errors and delivering real-time visibility.',
-    features: ['Role-based authentication', 'Real-time inventory visibility', 'Optimized MySQL indexing', 'Live AJAX updates without refresh'],
-    tech: ['PHP', 'MySQL', 'AJAX', 'Bootstrap'],
-    filters: ['PHP', 'MySQL', 'JavaScript'],
+      'Built a vanilla PHP and MySQL inventory system with bcrypt-secured login, admin/staff role-based access, product, category, sales and purchase management, stock-status and low-stock views, Chart.js dashboard analytics, filterable reports, CSRF protection, and prepared SQL statements.',
+    features: [
+      'Secure user authentication (bcrypt)',
+      'Role-based access control (admin & staff)',
+      'Product & category management',
+      'Sales tracking',
+      'Purchase management',
+      'Stock status & low-stock views',
+      'Dashboard analytics (Chart.js)',
+      'Filterable reports',
+      'CSRF protection & prepared SQL statements',
+    ],
+    tech: ['PHP', 'MySQL', 'Chart.js', 'HTML/CSS'],
+    filters: ['PHP', 'MySQL'],
     role: 'Lead Developer · Sortiq Solution',
     github: 'https://github.com/KulveerSingh60/Inventory-Stock-MAnagement-System',
+    demo: 'https://kulveer-singh.wuaze.com/',
     visual: 'inventory',
     accent: '#2bd98b',
   },
   {
     id: 2,
     number: '02',
-    title: 'Digital Marketing · GreenBasket',
-    tag: 'Training · 45 Days',
+    title: 'EstateLuxe · Real Estate Website',
+    tag: 'Web Development · Live',
     description:
-      'At Softwiz Pvt. Ltd., applied SEO, social media marketing, and paid-advertising strategies on live campaigns, analysed performance metrics, and prepared engagement reports. Built GreenBasket, a WordPress website, as part of the internship.',
-    problem:
-      'Live campaigns needed hands-on SEO, social, and paid-advertising execution with clear performance reporting.',
-    solution:
-      'Applied SEO, SMM and paid-advertising strategies on live campaigns, analysed performance metrics, prepared weekly reports, and built a WordPress site (GreenBasket).',
-    features: ['Live campaign management', 'SEO & paid advertising', 'Performance analytics', 'WordPress site build'],
-    tech: ['WordPress', 'SEO', 'SMM', 'Analytics'],
-    filters: ['WordPress'],
-    role: 'Digital Marketing Trainee · Softwiz Pvt. Ltd.',
-    github: LINKS.github,
-    visual: 'marketing',
-    accent: '#e1306c',
+      'A real estate website built and deployed as a live web project.',
+    tech: [],
+    filters: [],
+    demo: 'https://estateluxe.infinityfree.io/',
+    visual: 'estateluxe',
+    accent: '#e8a44d',
   },
 ]
 
